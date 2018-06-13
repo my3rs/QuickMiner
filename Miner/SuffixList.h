@@ -13,6 +13,7 @@
 #include <vector>
 
 #include "Suffix.h"
+#include "RuleCache.h"
 
 class SuffixList {
 private:
@@ -36,7 +37,6 @@ public:
     std::vector<Suffix>& getSuffixList();
 
     void setMaxSuffixSize(int maxSuffixSize);
-
 
 };
 
