@@ -7,6 +7,8 @@
 
 #include <string>
 
+
+
 class Suffix {
 private:
     std::string suffix;     // suffix 代表的文件名， TODO： 替换为文件对象，挖掘更多信息
@@ -16,12 +18,14 @@ public:
     Suffix(std::string &suffix, int support) : suffix(suffix), support(support) {};
 
     std::string getSuffix();
+
     void setSuffix(std::string &suffix);
 
     int getSupport();
+
     void setSupport(int support);
 
-    friend std::ostream& operator<<(std::ostream& out, const Suffix &s);
+    friend std::ostream &operator<<(std::ostream &out, const Suffix &s);
 };
 
 

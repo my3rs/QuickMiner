@@ -5,17 +5,22 @@
 #ifndef QUICKMINER_RULECACHE_H
 #define QUICKMINER_RULECACHE_H
 
-#include "LRUCache.h"
+#include <iostream>
+
+#include "../LRUCache/LRUCache.h"
 #include "SuffixList.h"
 
 
 class RuleCache {
 private:
+
     cache::LRUCache<std::string, SuffixList> rules;     // 存储Rules： Key为 A|B 形式的 prefix， Value为预测的后缀列表
     int maxCapacity;                // capacity of cache
     int maxSuffixCapacity;          // capacity of Prefix's SuffixList
 
 public:
+    RuleCache(int maxCapacity, int maxSuffixCapacity);
+
     bool addRule(std::string prefix, std::string suffix);
 
     cache::LRUCache<std::string, SuffixList>& getRules();
@@ -24,6 +29,7 @@ public:
 
     int getMaxSuffixCapacity();
 
+    void showRules();
 };
 
 

@@ -3,11 +3,10 @@
 
 
 QuickMiner::QuickMiner(int maxGap, int maxPrefixNum, int maxSuffixNum)
-    : accessLogs(), currenLogs(), ruleCache()
+    : maxGap(maxGap), maxPrefixNum(maxPrefixNum), maxSuffixNum(maxSuffixNum), ruleCache(maxPrefixNum, maxSuffixNum)
 {
-    // empty
-}
 
+}
 
 void QuickMiner::miningByBatch() {
     // 检查日志输入序列
@@ -23,7 +22,7 @@ void QuickMiner::miningByBatch() {
             std::string prefix = accessLogs[i] + "|" + accessLogs[j];
 
             for (int k = j + 1; k <= maxGap + j && k < accessLogs.size(); k ++) {
-                string suffix = accessLogs[k];
+                std::string suffix = accessLogs[k];
                 ruleCache.addRule(prefix, suffix);
             }
         }
@@ -55,7 +54,7 @@ void QuickMiner::miningByStep(std::string& log) {
         for (int i = j - 1; i >= j - maxGap && i >= 0; i--) {
             // 类似 a|b -> a 这种规则不生成
             if (currenLogs[i] == log) {
-                continue
+                continue;
             }
 
             ruleCache.addRule(currenLogs[i] + currenLogs[j], log);
@@ -67,12 +66,12 @@ void QuickMiner::miningByStep(std::string& log) {
 
 
 
-std::vector<string> QuickMiner::getPredictSuffix(std::string& prefix) {
-    std::vector<std::string> suffixList;
+std::vector<Suffix> QuickMiner::getPredictSuffix(std::string& prefix) {
+    std::vector<Suffix> suffixList;
 
     try {
         SuffixList suffixes = ruleCache.getRules().get(prefix);
-        suffixList.emplace_back(suffixes.getSuffixList().begin(), suffixes.getSuffixList().end());
+        suffixList.assign(suffixes.getSuffixList().begin(), suffixes.getSuffixList().end());
     } catch (std::range_error& error) {
         // do nothing
     }
@@ -115,3 +114,6 @@ RuleCache QuickMiner::getRuleCache() {
     return ruleCache;
 }
 
+void QuickMiner::showRuleCache() {
+    ruleCache.showRules();
+}

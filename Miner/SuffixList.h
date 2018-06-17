@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "Suffix.h"
-#include "RuleCache.h"
+//#include "RuleCache.h"
 
 class SuffixList {
 private:
@@ -22,22 +22,23 @@ private:
     int maxSuffixSize;
 
 public:
-    explicit SuffixList(int maxSuffixSize = 16) : key2Position(), suffixList(), maxSuffixSize(maxSuffixSize){};
+    explicit SuffixList(int maxSuffixSize = 16) : key2Position(), suffixList(), maxSuffixSize(maxSuffixSize) {};
 
     // 向 SuffixList 中添加 Suffix 元素， 如果
     // 1. 该 Suffix 存在， 增加 suffix.support
     // 2. 该 Suffix 不存在， 添加 suffix, support = 1
     // 最后，移动 suffix 到相同 support 元素的第一个位置，更新位置映射
-    void add(std::string& suffixName);
+    void add(std::string &suffixName);
 
-    void updateKey2Pos(std::string& suffixName, unsigned long oldPos, unsigned long newPos);
+    void updateKey2Pos(std::string &suffixName, unsigned long oldPos, unsigned long newPos);
 
-    std::map<std::string, int>& getKey2Position();
+    std::map<std::string, int> &getKey2Position();
 
-    std::vector<Suffix>& getSuffixList();
+    std::vector<Suffix> &getSuffixList();
 
     void setMaxSuffixSize(int maxSuffixSize);
 
+    friend std::ostream&operator<<(std::ostream &out, SuffixList &sl);
 };
 
 

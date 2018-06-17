@@ -12,6 +12,7 @@
 #include <list>
 #include <cstddef>
 #include <stdexcept>
+#include <iostream>
 
 namespace cache {
 
@@ -23,6 +24,12 @@ namespace cache {
 
         LRUCache(size_t max_size) :
                 _max_size(max_size) {
+        }
+
+        void dump() {       // Risky!!! This func is just for test!
+            for (auto &entry : _cache_items_list) {
+                std::cout << entry.first << "->" << entry.second << "\n";
+            }
         }
 
         void put(const key_t& key, const value_t& value) {

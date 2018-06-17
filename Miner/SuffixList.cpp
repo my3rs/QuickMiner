@@ -3,7 +3,7 @@
 //
 
 #include "SuffixList.h"
-
+#include <iostream>
 
 void SuffixList::add(std::string& suffixName) {
     // init: add the first suffix
@@ -91,3 +91,12 @@ void SuffixList::setMaxSuffixSize(int maxSuffixSize) {
     this->maxSuffixSize = maxSuffixSize;
 }
 
+std::ostream&operator<<(std::ostream &out, SuffixList &sl) {
+    out << "[";
+    for (auto &entry : sl.suffixList) {
+        out << entry << ", ";
+    }
+    out << "\b\b]";
+
+    return out;
+}

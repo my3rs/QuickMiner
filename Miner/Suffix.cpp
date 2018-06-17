@@ -1,5 +1,6 @@
 
 #include "Suffix.h"
+#include <ostream>
 
 std::string Suffix::getSuffix() {
     return this->suffix;

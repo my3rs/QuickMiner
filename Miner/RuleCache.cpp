@@ -1,5 +1,11 @@
 #include "RuleCache.h"
+#include <iostream>
 
+RuleCache::RuleCache(int maxCapacity, int maxSuffixCapacity)
+    : maxCapacity(maxCapacity), maxSuffixCapacity(maxSuffixCapacity), rules(maxCapacity)
+{
+
+}
 
 bool RuleCache::addRule(std::string prefix, std::string suffix) {
     bool isNewRule = true;
@@ -27,4 +33,8 @@ int RuleCache::getMaxCapacity() {
 
 int RuleCache::getMaxSuffixCapacity() {
     return this->maxSuffixCapacity;
+}
+
+void RuleCache::showRules() {
+    rules.dump();
 }
