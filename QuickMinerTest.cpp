@@ -29,9 +29,9 @@ int main(int argc, char* argv[]) {
     
     // 增量挖掘关联关系
 
-    for (auto &log : logs) {
-        miner.miningByStep(log);
-    }
+//    for (auto &log : logs) {
+//        miner.miningByStep(log);
+//    }
 
     miner.showRuleCache();
 }
