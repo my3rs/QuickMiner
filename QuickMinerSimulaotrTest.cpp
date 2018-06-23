@@ -13,9 +13,10 @@ int main(int argc, char* argv[]) {
         // generate rules: QuickMine don't need to generate rules ahead
         int hitCount = 0;
         int prefetchCount = 0;
+        clock_t totalTime = 0;
 
         for (auto currentFile : logs) {
-
+            clock_t start = clock();
             string targetFile = simulator.getFileFromCache(currentFile);
             if (targetFile.empty()) {
                 // read miss causes prediction
@@ -31,10 +32,11 @@ int main(int argc, char* argv[]) {
             // generate new rules incrementally
             simulator.generateNewRule(currentFile);
 
-
+            clock_t end = clock();
+            totalTime += end - start;
         }
-        cout << "Cache Size: " << fileCacheSize << "\t" << "QuickMiner Hit Ratio: " << hitCount * 1.0f / logs.size()
-             << "\n";
+        cout << "Cache Size: " << fileCacheSize << "\tQuickMiner Hit Ratio: " << hitCount * 1.0f / logs.size()
+             << "\tTotal Time: " << totalTime * 1.0f / CLOCKS_PER_SEC << "s.\n";
 
     }
 }
